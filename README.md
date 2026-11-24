@@ -2,6 +2,8 @@
 
 데이터의 바다에서 창업 기회를 낚는 AI 런치패드. 소스를 고르고, 근거를 확인하며, 브랜드 도메인과 시장 수요를 탐색하는 한국어 정적 웹 앱입니다.
 
+[Cloudflare 서비스 열기](https://start-eobu.sgwcrong.workers.dev/)
+
 ## GitHub Pages 무료 배포
 
 1. 이 폴더의 소스를 공개 GitHub 저장소의 main 브랜치에 올립니다.
@@ -35,7 +37,9 @@ GitHub Pages는 정적 화면과 브라우저 기록을 제공합니다. 계정 
 
 Google 로그인은 Google Cloud Console의 Google Auth Platform에서 웹 애플리케이션 OAuth 클라이언트를 생성한 뒤 활성화할 수 있습니다. 승인된 리디렉션 URI는 Cloudflare의 공개 HTTPS 주소에 \`/api/callback/google\`을 붙인 값입니다. \`npx wrangler secret put GOOGLE_CLIENT_ID\`와 \`npx wrangler secret put GOOGLE_CLIENT_SECRET\`으로 자격 증명을 등록합니다. 두 로그인은 각각 활성화할 수 있으며 Google 로그인과 GitHub 로그인은 서로 다른 계정으로 저장됩니다.
 
-Cloudflare 주소에 처음 배포하기 전에는 대화 기록을 브라우저에 저장합니다. Worker는 GitHub 사용자 ID를 기준으로 대화를 조회하고, 두 기기에서 같은 대화를 수정하면 새 기록을 별도로 저장해 덮어쓰기를 피합니다.
+운영 Worker와 D1은 생성되어 있습니다. GitHub Actions에서 Cloudflare 자동 배포를 활성화하려면 저장소 Actions Variables에 `CLOUDFLARE_ACCOUNT_ID`와 `CLOUDFLARE_DEPLOY=true`를, Actions Secret에 해당 계정의 Workers Scripts 쓰기 권한을 가진 `CLOUDFLARE_API_TOKEN`을 등록합니다. 이후 main 푸시나 예약 실행에서 Cloudflare 배포도 진행됩니다.
+
+로그인 전 대화 기록은 브라우저에 저장됩니다. Worker는 GitHub 사용자 ID를 기준으로 대화를 조회하고, 두 기기에서 같은 대화를 수정하면 새 기록을 별도로 저장해 덮어쓰기를 피합니다.
 
 ## 방문자용 AI
 

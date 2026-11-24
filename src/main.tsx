@@ -756,7 +756,9 @@ function App() {
                   ? "계정 연결 확인 중…"
                   : conversations.available
                     ? "대화 저장을 마치면 로그인할 수 있습니다."
-                    : "이 주소에서는 브라우저에 대화가 저장됩니다. 계정 로그인은 Cloudflare 배포에서 제공됩니다."}
+                    : import.meta.env.VITE_ACCOUNT_SYNC
+                      ? "계정 로그인 연결을 준비 중입니다. 지금은 이 브라우저에 대화가 저장됩니다."
+                      : "이 주소에서는 브라우저에 대화가 저장됩니다. 계정 동기화는 Cloudflare 주소에서 사용할 수 있습니다."}
               </p>
             )}
           </>

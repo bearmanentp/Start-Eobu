@@ -11,7 +11,7 @@
     {
       "binding": "DB",
       "database_name": "start-eobu",
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "a758bd7b-af50-40ae-8706-ea9003a4c2f0",
       "migrations_dir": "cloudflare/migrations",
     },
   ],
