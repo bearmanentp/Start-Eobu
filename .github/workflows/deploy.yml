@@ -28,7 +28,7 @@ jobs:
         env:
           KSTARTUP_API_KEY: ${{ secrets.KSTARTUP_API_KEY }}
           BIZINFO_API_KEY: ${{ secrets.BIZINFO_API_KEY }}
-      - run: npm ci
+      - run: npm ci --onnxruntime-node-install-cuda=skip
       - run: npm run build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
