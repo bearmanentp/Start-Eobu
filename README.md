@@ -16,8 +16,8 @@
 
 저장소의 Settings → Secrets and variables → Actions → New repository secret에서 사용할 키를 등록합니다.
 
-- `KSTARTUP_API_KEY`에 공공데이터포털 K-Startup 국문 공고 서비스의 일반 인증키(Decoding)를 등록합니다.
-- `BIZINFO_API_KEY`에 기업마당 인증키를 등록합니다.
+- `KSTARTUP_API_KEY`에 [공공데이터포털 K-Startup 조회서비스](https://www.data.go.kr/data/15125364/openapi.do)의 일반 인증키(Decoding)를 등록합니다.
+- `BIZINFO_API_KEY`에 [기업마당 지원사업정보 API](https://www.bizinfo.go.kr/apiDetail.do?id=bizinfoApi)의 인증키를 등록합니다.
 
 워크플로를 다시 실행하면 Python 수집 단계가 등록한 키를 사용하고, Pages는 수집 결과 JSON을 제공합니다. 각 공급자의 수집 여부는 Actions 로그에서 확인할 수 있습니다. 도메인·시장 조회와 방문자용 AI는 키 없이 브라우저에서 실행됩니다.
 

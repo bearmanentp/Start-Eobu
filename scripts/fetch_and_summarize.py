@@ -57,16 +57,25 @@ def github():
     return [source("GitHub", h["full_name"], h["description"], h["html_url"]) for h in rows]
 
 
+def feed_items(payload):
+    rows = payload["item"] if isinstance(payload, dict) else payload
+    if not isinstance(rows, list):
+        raise ValueError("invalid feed response")
+    return rows
+
+
 def kstartup():
-    rows = fetch("https://apis.data.go.kr/B552735/kisedKstartupService01/getAnnouncementInformation01",
-                 serviceKey=os.environ["KSTARTUP_API_KEY"], returnType="json", page=1, perPage=20)["data"]
+    response = fetch("https://apis.data.go.kr/B552735/kisedKstartupService02/getAnnouncementInformation02",
+                     serviceKey=os.environ["KSTARTUP_API_KEY"], returnType="json", page=1, perPage=20)
+    rows = feed_items(response["data"])
     return [source("K-Startup", h["biz_pbanc_nm"], h.get("pbanc_ctnt"), h.get("detl_pg_url") or "https://www.k-startup.go.kr/", True,
                    h.get("aply_trgt_ctnt") or "", deadline(h.get("pbanc_rcpt_end_dt"))) for h in rows]
 
 
 def bizinfo():
-    rows = fetch("https://www.bizinfo.go.kr/uss/rss/bizinfoApi.do", crtfcKey=os.environ["BIZINFO_API_KEY"],
-                 dataType="json", searchCnt=20)["jsonArray"]
+    response = fetch("https://www.bizinfo.go.kr/uss/rss/bizinfoApi.do", crtfcKey=os.environ["BIZINFO_API_KEY"],
+                     dataType="json", searchCnt=20)
+    rows = feed_items(response["jsonArray"])
     return [source("기업마당", h["pblancNm"], h.get("bsnsSumryCn"), urljoin("https://www.bizinfo.go.kr", h["pblancUrl"]),
                    True, h.get("trgetNm") or "", deadline(h.get("reqstBeginEndDe"))) for h in rows]
 
